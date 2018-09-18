@@ -3,12 +3,14 @@
 - socket events: 'end' then 'close'
 
 - http.Server -> 'request' (req, res) -> 'finish' -> `res.end` callback
-- http.ClientRequest (writable stream)
+- http.ClientRequest (writable stream) -> 'response' http.IncomingMessage -> 'data'
+  - `res` is http.IncomingMessage because this "makes" a request (it is a client) hence the server (remote) response is the incoming message
+  - if 'response' handler is added the data from the response object must be consumed otherwise the 'end' event will not be fired - lead to memory leak
 
-- http.IncomingMessage (readable stream)
+- http.IncomingMessage (**readable stream**)
   - http.Server 'request' (req)
   - http.ClientRequest 'response' (res)
-- http.ServerResponse (writable stream)
+- http.ServerResponse (**writable stream**)
   - http.Server 'request' (res)
 
 http://book.mixu.net/node/ch10.html
@@ -66,4 +68,6 @@ https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
 
 ## Node Stream
 
+- ReadableStream: to read data _from_ (readable ->)
+- WritableStream: to write data _to_ (-> writable)
 - [Streaming Chunked HTML - StrongLoop 2014](https://strongloop.com/strongblog/streaming-chunked-html-node-js-data/)
