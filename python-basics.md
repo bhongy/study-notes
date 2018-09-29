@@ -115,6 +115,8 @@ print MyClass.some_attribute # Better
 print my_instance.foo
 ```
 
+- accessing instance attribute: `my_instance.foo` will try to get from instance `my_instance.__dict__` then if not found, it will try to get from class attribute `my_instance.__class__.__dict__`. Raise AttributeError if still not found. [Reference](https://www.toptal.com/python/python-class-attributes-an-overly-thorough-guide)
+
 ## Modules & Packages
 
 Create `__init__.py` in a folder to create a package.
@@ -123,4 +125,41 @@ Create `__init__.py` in a folder to create a package.
 # from <Package (folder)> import <Module (file)>
 # import <Module>
 # from Foo.Bar import Baz
+```
+
+## Python Debugger (pdb)
+
+```python
+import pdb
+
+obj = { 'foo': 'bar' }
+
+# break here, can interact with `obj`
+pdb.set_trace()
+
+# type `q` to quit
+```
+
+## pytest
+
+- `pytest -s` to allow print statements to show in console (by default, pytest captures those and you won't see them)
+- names of the setup/teardown methods have to match exactly
+
+```python
+# execute once for the whole module
+def setup_module(module):
+    pass
+
+# execute once for the test class
+@classmethod
+def setup_class(cls):
+    pass
+
+# execute for every method of the test class
+def setup_method(self, method):
+    pass
+
+# execute for every function at the module level (not a class method)
+def setup_function(test_function):
+    pass
 ```
