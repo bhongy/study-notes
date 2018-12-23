@@ -48,9 +48,6 @@ https://nodejs.org/en/docs/guides/anatomy-of-an-http-transaction/#sending-respon
 - It's important to set the status and headers (`res.writeHead`) before you start writing chunks of data to the body (`res.write`).
 
 https://medium.freecodecamp.org/understanding-node-js-event-driven-architecture-223292fcbc2d
-https://medium.freecodecamp.org/node-js-streams-everything-you-need-to-know-c9141306be93
-- good overview of nodejs stream
-
 https://nodejs.org/en/docs/guides/backpressuring-in-streams/
 - advanced concept on backpressuring - review when I work with node streams more
 
@@ -70,4 +67,5 @@ https://nodejs.org/en/docs/guides/event-loop-timers-and-nexttick/
 
 - ReadableStream: to read data _from_ (readable ->)
 - WritableStream: to write data _to_ (-> writable)
+- [Stream Fundamental](https://medium.freecodecamp.org/node-js-streams-everything-you-need-to-know-c9141306be93)
 - [Streaming Chunked HTML - StrongLoop 2014](https://strongloop.com/strongblog/streaming-chunked-html-node-js-data/)
