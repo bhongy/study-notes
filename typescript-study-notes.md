@@ -22,14 +22,12 @@
 - [utility types](https://github.com/Microsoft/TypeScript/blob/71286e3d49c10e0e99faac360a6bbd40f12db7b6/src/lib/es5.d.ts#L1391-L1459)
   - also see examples: [Advanced Types](https://www.typescriptlang.org/docs/handbook/advanced-types.html) - section "Predefined conditional types"
 - `{ [P in K]: T[P] }` mapped types (iterate through `K` union string literal type) and `T[P]` is the type of the value of property `P`
+    - `{ [P in keyof T]-?: T[P] }` remove optional - i.e. make required
+    - `type Partial<T> = { [P in keyof T]?: T[P]; };` - make all properties optional, already exists in typescript
+    - `type Readonly<T> = { readonly [P in keyof T]: T[P]; };` - already exists in typescript
+    - `type Dictionary<T> = Partial<{ [key: string]: Readonly<T> }>;` - all props are readonly + lookup might return `undefined` + optional
 - `T extends U ? X : Y` conditional type
 - `interface T extends A, B, C` extends from multiple interfaces (only interface, class does not support multiple `extends` - i.e. inheritance)
-
-(from https://codeburst.io/five-tips-i-wish-i-knew-when-i-started-with-typescript-c9e8609029db)
-- `type Partial<T> = { [P in keyof T]?: T[P]; };` - make all properties optional, already exists in typescript
-- `type Readonly<T> = { readonly [P in keyof T]: T[P]; };` - already exists in typescript
-- `type Dictionary<T> = Partial<{ [key: string]: Readonly<T> }>;` - all props are readonly + lookup might return `undefined` + optional
-
 - `export =` is like commonjs `module.exports =` must use with `import <var> = require(...)`
 
 
