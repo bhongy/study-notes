@@ -114,9 +114,10 @@
 
 - always use `strictNullChecks` otherwise it's so permissive and dangerous
 - optional property `{ foo?: string }` does not accept `null` like `{ foo: null }`
-- `?` only is for "optional" object property or function arguments - unlike Flow it doesn't support as a shorthand of `void | null | T` (I think this is good) so you cannot do `{ foo?: ?string }`
-  - optional in typescript basically `| undefined`
-  - absence of a property is treat the same as the property has value of `undefined`
+- `?` only is for "optional" object property or function arguments - unlike Flow there is no syntax for `?T -> void | null | T` (I think this is good) so you cannot do `{ foo?: ?string }`
+  - `{ foo?: string }` will accept `{}` as well as `{ foo: undefined }`
+  - `{ foo: undefined | string }` will only accept `{ foo: undefined }` but not `{}`
+  - summary: `?` accepts `undefined` or just omission but `| undefined` does not allow omission
 - `Object` type (note capital "O" - different than the `object` type) is like `any` (allowing assigning any value types) but will fail any method calls (even ones that exists on the current value)
 - `object` type is anything non-primitive
 - excess property check is only triggered when an object literal created and pass in function application directly (rather than passing its reference)
