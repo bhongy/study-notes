@@ -18,6 +18,9 @@ API [~]
  - Parser [X]
 Guides [ ]
  - Installation -> Hot Module Replacement [X]
+ - Code Splitting [X]
+ - Lazy Loading [X]
+ - Caching [X]
 Loaders [ ]
 Plugins [ ]
 Migrate [ ]
@@ -48,3 +51,10 @@ __Marker Legends__
 
 Current chapter: Loaders
 Also done reading: Server Side Rendering
+
+# Webpack 4 Refs
+
+[webpack 4: Code Splitting, chunk graph and the splitChunks optimization @ Sokra](https://medium.com/webpack/webpack-4-code-splitting-chunk-graph-and-the-splitchunks-optimization-be739a861366)
+In-depth understanding how it works. Benefits/improvements over CommonChunksPlugin.
+
+[RIP CommonsChunkPlugin @ Sokra](https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693)
