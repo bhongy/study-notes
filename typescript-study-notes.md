@@ -175,3 +175,26 @@ const { a, ...four } = one;
   - https://www.typescriptlang.org/docs/handbook/advanced-types.html
 - function overloads
 - works really well with VSCode
+
+## tsconfig.json
+
+- `module` if not specified. It will generally use `commonjs` for older `target` or ESM (e.g. `es6`) for newer `target`. `commonjs` is a good one to always use for better interop with other npm packages that use `module.exports` (built). `module == commonjs` will enable `esModuleInterop` and `allowSyntheticDefaultImports`.
+
+```typescript
+/* module.commonjs output of `import * as React from 'react';` */
+import * as React from 'react'; // leave as-is
+```
+
+```typescript
+/* module.es6 output of `import * as React from 'react';` */
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const React = require("react");
+```
+
+- `esModuleInterop` only matter when `module.commonjs`. It will add `__importStar` and `__importDefault` helper functions to work in commonjs (compatible with babel). This will also enable `allowSyntheticDefaultImports`. We warned it will generates quite a bit of code.
+- `allowSyntheticDefaultImports` only matter when `module.commonjs`. Allow default imports from modules with no default export.
+- `moduleResolution` always use `node` (but can omit if `module == commonjs` because it'll use `node`). Alternative `classic` is only for backward compatibility which won't look in `node_modules` hence it will cause error `TS2307: Cannot find module ...`. `tsc --traceResolution` is a good way to get information why a module cannot be found.
+
+- `baseUrl` no effect on relative imports. Primarily needed when using path mapping (`path`).
+- `path` alias import path to actual file location. TS compiler will **not** rewrite the path on build - this is mostly for typechecking side of typescript. You have to set up babel (or other tools) to do that. Using `path` requires `baseUrl` to be set since it resolves relative to `baseUrl`. [More info about path mapping](https://www.typescriptlang.org/docs/handbook/module-resolution.html#path-mapping).
